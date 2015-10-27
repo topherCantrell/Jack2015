@@ -15,3 +15,6 @@ Here is the hardware and pumpkin:
 The plan is to use the two smaller displays for eyes. Three of the plates will make a mouth. I'll offset them to better allow a smile. I'll use the center stripe of the fourth for a nose.
 
 I already have the propeller software going. I was planning a Circuit Cellar article (of course) on the grid mapping. This project will be a good addition to the article.
+
+Schematics:
+![](https://github.com/topherCantrell/Jack2015/blob/master/art/JackSchematics.png)
