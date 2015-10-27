@@ -1,4 +1,4 @@
-# Jack2015
+# Jack-o-Lantern 2015
 
 I have four bright neo-pixel plates and a couple of smaller LED grids. I might
 as well put them to work in a Jack-O-Lantern this year.
