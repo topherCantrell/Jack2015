@@ -123,6 +123,10 @@ PUB writeDisplay(register,count,data) | address
 ''
 '' Turn both red and green on to make orange
 
+PUB copyRaster(p) | i
+  repeat i from 0 to 15
+    raster[i] := byte[p+i]
+    
 PUB clearRaster | i
   repeat i from 0 to 15
     raster[i] := 0
