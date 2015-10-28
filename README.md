@@ -18,3 +18,6 @@ I already have the propeller software going. I was planning a Circuit Cellar art
 
 Schematics:
 ![](https://github.com/topherCantrell/Jack2015/blob/master/art/JackSchematics.png)
+
+Here is project using LED grids for eyes:
+[https://www.youtube.com/watch?v=e3O-ti5n6jw](https://www.youtube.com/watch?v=e3O-ti5n6jw)

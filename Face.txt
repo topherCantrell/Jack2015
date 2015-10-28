@@ -1,0 +1,48 @@
+
+..####.. 
+.######. 
+######## 
+###OO### 
+###OO### 
+######## 
+.######. 
+..####.. 
+
+; Blink by blanking lines from top and bottom to middle and back.
+; Blink in an alternating pattern. Blink one to wink.
+; Brighten and dim displays.
+; Scroll left and right.
+;
+; 2x2 hole can be anywhere in the inner 6x6.
+;
+; 5 possible vertical positions, 5 possible horizontal positions. 25 total.
+;
+; (x,y) 0,0 is middle
+; (-2,-2) is upper left
+; (2,2) is lower right
+;
+; OO....
+; .OO...
+; ..OO..
+; ...OO.
+; ....OO
+; ......
+;
+; Standard sequence commands:
+; PAUSE N (milliseconds)
+; LOOP/NEXT (
+; GOSUB A (subroutine A)
+; RETURN (return from subroutine)
+; RANDOM A,B (go to random sequence number A to B inclusive)
+; GOTO A (go to sequence)
+;
+; Eye specific commands:
+; COLORS L, R, B (left, right, background ... 0,1,2,3)
+; BLINK N (0=left, 1=right, 2=both)
+; BRIGHTNESS N (0-15)
+; X,Y (-2,-2 to 2,2)
+;
+
+
+
+
