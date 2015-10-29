@@ -10,6 +10,31 @@ import java.util.Map.Entry;
 
 public abstract class Base {
     
+    public static String replaceAll(String s, String key, String value) {        
+        while(true) {
+            int i = s.indexOf(key);
+            if(i<0) return s;
+            s = s.substring(0,i)+value+s.substring(i+key.length());
+        }        
+    }
+    
+    public static String twoDigitHex(int value) {
+        String ret = Integer.toString(value,16);
+        if(ret.length()==1) {
+            ret = "0" + ret;
+        }
+        return "$"+ret;
+    }
+    
+    public static String outputWord(int value) {
+        int a = value>>8;
+        int b = value & 0xFF;
+        return twoDigitHex(a)+", "+twoDigitHex(b);        
+    }
+    
+    
+    
+    
     List<String> lines = new ArrayList<String>();
     Map<String,Integer> defines = new HashMap<String,Integer>();
     
@@ -21,32 +46,24 @@ public abstract class Base {
             s = s.trim();
             if(!s.isEmpty()) lines.add(s);
         }
-    }
+    }    
     
-    String replaceAll(String s, String key, String value) {        
-        while(true) {
-            int i = s.indexOf(key);
-            if(i<0) return s;
-            s = s.substring(0,i)+value+s.substring(i+key.length());
-        }        
-    }
-    
-    String doSubstitutions(String s) {
+    private String doSubstitutions(String s) {
         for(Entry<String, Integer> ent : defines.entrySet()) {
             s = replaceAll(s, ent.getKey(), ""+ent.getValue());
         }
         return s;
     }
     
-    String outputWord(int value) {
-        int a = value>>8;
-        int b = value & 0xFF;        
-        return "$"+Integer.toString(a,16)+", $"+Integer.toString(b,16);
+    public void compile(PrintStream ps) {
+        compilePass(null); // First pass. Just find the label addresses.
+        compilePass(ps);   // Second pass. Generate code.
     }
             
-    public void compile(PrintStream ps) {
-        // TODO two passes to get all addresses
+    public void compilePass(PrintStream ps) {
+        
         int address = 0;
+        
         for(String s : lines) {
             
             s = s.toUpperCase();
@@ -69,7 +86,10 @@ public abstract class Base {
             s = doSubstitutions(s);
             
             // These are the commands we know
+            
             if(s.startsWith("PAUSE ")) {
+                address += 2;
+                if(ps==null) continue;
                 int i = s.indexOf(" ");
                 i = Integer.parseInt(s.substring(i+1).trim());
                 ps.println(" byte $F0, "+outputWord(i)+" ' "+s);
@@ -77,18 +97,27 @@ public abstract class Base {
             }
             
             if(s.startsWith("GOTO ")) {
+                address += 2;
+                if(ps==null) continue;
                 int i = s.indexOf(" ");
                 i = Integer.parseInt(s.substring(i+1).trim());
                 ps.println(" byte $FF, "+outputWord(i)+" ' "+s);
                 continue;
             }
             
-            // These are the DSL commands
+            // These are the DSL specific commands
+            
             doCompile(s,ps);
             
         }
     }
 
-    protected abstract void doCompile(String command,PrintStream ps);
+    /**
+     * Compile the given command
+     * @param command the single line text of the command
+     * @param ps the output stream (or null for the first pass)
+     * @return the number of data bytes for the command
+     */
+    protected abstract int doCompile(String command, PrintStream ps);
 
 }

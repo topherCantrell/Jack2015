@@ -8,8 +8,10 @@ public class Jack extends Base {
     }
     
     @Override
-    public void doCompile(String command,PrintStream ps) {
+    public int doCompile(String command,PrintStream ps) {
         if(command.startsWith("DRAWEYES ")) {
+            
+            if(ps==null) return 2;
             
             String [] coords = command.substring(9).split(",");
             
@@ -17,7 +19,7 @@ public class Jack extends Base {
             String right = "$"+coords[2].trim()+coords[3].trim();
             
             ps.println(" byte $01, "+left+", " + right+" ' "+command);
-            return;
+            return 2;
         }
         
         throw new RuntimeException("UNKNOWN: "+command);
