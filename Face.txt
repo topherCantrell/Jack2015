@@ -3,6 +3,13 @@ set DELAY = 64
 
 top:
 
+DrawEyes 2,2, 2,2
+Pause 1000
+Blink
+Pause 500
+Blink
+Pause 100
+
 DrawEyes 1,1, 1,1
 Pause DELAY
 
