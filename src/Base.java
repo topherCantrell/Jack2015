@@ -36,6 +36,8 @@ public abstract class Base {
     
     
     List<String> lines = new ArrayList<String>();
+    int linePos;
+    
     Map<String,Integer> defines = new HashMap<String,Integer>();
     
     public Base(String filename) throws IOException {
@@ -57,16 +59,25 @@ public abstract class Base {
     
     public void compile(PrintStream ps) {
         compilePass(null); // First pass. Just find the label addresses.
-        compilePass(ps);   // Second pass. Generate code.
+        compilePass(ps);   // Second pass. Generate code.        
     }
             
+    
+    protected List<String> getNextLines(int num) {
+        List<String> ret = new ArrayList<String>();        
+        for(int x=0;x<num;++x) {
+            ret.add(lines.get(linePos++));
+        }        
+        return ret;
+    }
+    
     public void compilePass(PrintStream ps) {
         
         int address = 0;
-        
-        for(String s : lines) {
+                
+        for(linePos = 0; linePos<lines.size();) { 
             
-            s = s.toUpperCase();
+            String s = lines.get(linePos++).toUpperCase();
             
             // Labels
             if(s.endsWith(":")) {
@@ -107,8 +118,12 @@ public abstract class Base {
             
             // These are the DSL specific commands
             
-            doCompile(s,ps);
+            address += doCompile(s,ps);
             
+        }
+        
+        if(ps!=null) {
+            ps.println(" ' "+address+" bytes");
         }
     }
 
