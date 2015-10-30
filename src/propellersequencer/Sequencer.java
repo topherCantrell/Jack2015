@@ -1,3 +1,5 @@
+package propellersequencer;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
@@ -8,7 +10,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public abstract class Base {
+public abstract class Sequencer {
+    
+    /*
+     
+     here:        ; Address label
+     SET A=22     ; Define a variable
+     
+     PAUSE  msec -> F0, mm, ll  ; Pause for given milliseconds
+     GOTO   addr -> FF, mm, ll  ; Jump to the given address
+     
+     */
     
     public static String replaceAll(String s, String key, String value) {        
         while(true) {
@@ -40,7 +52,7 @@ public abstract class Base {
     
     Map<String,Integer> defines = new HashMap<String,Integer>();
     
-    public Base(String filename) throws IOException {
+    public Sequencer(String filename) throws IOException {
         List<String> ls = Files.readAllLines(Paths.get(filename));
         for(String s : ls) {
             int i = s.indexOf(';');

@@ -3,7 +3,30 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jack extends Base {
+import propellersequencer.Sequencer;
+
+public class Jack extends Sequencer {
+    
+    /*
+    
+     DRAWEYES x,y, x,y
+     
+     BLINK L,R, x,y,  x,y
+     
+     COLORS
+     ...
+     ...
+     #
+     
+     DRAWNOSE charMap
+     ...
+     ...
+     
+     DRAWMOUTH charMap
+     ...
+     ...    
+     
+     */
 
     public Jack(String filename) throws IOException {
         super(filename);        
@@ -78,6 +101,12 @@ public class Jack extends Base {
         }
         
         if(command.startsWith("COLORS")) {
+            
+            // COLORS
+            //  ...
+            //  ...
+            // #
+            
             List<String> colors = new ArrayList<String>();
             while(true) {
                 List<String> c = getNextLines(1);
@@ -87,7 +116,7 @@ public class Jack extends Base {
             
             if(ps==null) return colors.size()*4+1;
             
-            ps.println(" byte $03, "+Base.twoDigitHex(colors.size())+" ' "+command);
+            ps.println(" byte $03, "+Sequencer.twoDigitHex(colors.size())+" ' "+command);
             for(String c : colors) {
                 ps.println(" byte "+c);
             }
@@ -96,6 +125,10 @@ public class Jack extends Base {
         }
         
         if(command.startsWith("DRAWMOUTH ")) {
+            
+            // DRAWMOUTH charMap
+            // ...
+            // ...
             
             List<String> raster = getNextLines(8);
             raster = mouthPixelSwap(raster);
@@ -111,7 +144,7 @@ public class Jack extends Base {
                 for(int y=0;y<24;++y) {
                     char c = l.charAt(y);
                     int i = colorMap.indexOf(c);
-                    ps.print(Base.twoDigitHex(i));
+                    ps.print(Sequencer.twoDigitHex(i));
                     if(y==23) {
                         ps.println(" ' "+l);
                     } else {
@@ -124,6 +157,10 @@ public class Jack extends Base {
         }
         
         if(command.startsWith("DRAWNOSE ")) {
+            
+            // DRAWNOSE charMap
+            // ...
+            // ...
             
             List<String> raster = getNextLines(8);
             
@@ -138,7 +175,7 @@ public class Jack extends Base {
                 for(int y=0;y<8;++y) {
                     char c = l.charAt(y);
                     int i = colorMap.indexOf(c);
-                    ps.print(Base.twoDigitHex(i));
+                    ps.print(Sequencer.twoDigitHex(i));
                     if(y==7) {
                         ps.println(" ' "+l);
                     } else {
