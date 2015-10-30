@@ -17,6 +17,7 @@ public abstract class Sequencer {
      here:        ; Address label
      SET A=22     ; Define a variable
      
+     NOP         -> 00          ; No-op (useful for padding)
      PAUSE  msec -> F0, mm, ll  ; Pause for given milliseconds
      GOTO   addr -> FF, mm, ll  ; Jump to the given address
      
@@ -110,6 +111,13 @@ public abstract class Sequencer {
             
             // These are the commands we know
             
+            if(s.equals("NOP")) {
+                address += 1;
+                if(ps==null) continue;
+                ps.println(" byte $00 ' "+s);
+                continue;
+            }
+            
             if(s.startsWith("PAUSE ")) {
                 address += 2;
                 if(ps==null) continue;
@@ -130,7 +138,7 @@ public abstract class Sequencer {
             
             // These are the DSL specific commands
             
-            address += doCompile(s,ps);
+            address += doCompile(address,s,ps);
             
         }
         
@@ -145,6 +153,6 @@ public abstract class Sequencer {
      * @param ps the output stream (or null for the first pass)
      * @return the number of data bytes for the command
      */
-    protected abstract int doCompile(String command, PrintStream ps);
+    protected abstract int doCompile(int address, String command, PrintStream ps);
 
 }

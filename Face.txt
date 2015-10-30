@@ -61,6 +61,10 @@ Pause DELAY
 
 GOTO top
 
+NOP
+NOP
+NOP
+
 ; Blink by blanking lines from top and bottom to middle and back.
 ; Blink in an alternating pattern. Blink one to wink.
 ; Brighten and dim displays.

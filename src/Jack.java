@@ -69,12 +69,12 @@ public class Jack extends Sequencer {
     }
     
     @Override
-    public int doCompile(String command,PrintStream ps) {
+    public int doCompile(int address,String command,PrintStream ps) {
         if(command.startsWith("DRAWEYES ")) {
             
             // DRAWEYES x,y,  x,y
             
-            if(ps==null) return 2;
+            if(ps==null) return 3;
             
             String [] coords = command.substring(9).split(",");
             
@@ -82,12 +82,12 @@ public class Jack extends Sequencer {
             String right = "$"+coords[2].trim()+coords[3].trim();
             
             ps.println(" byte $01, "+left+", " + right+" ' "+command);
-            return 2;
+            return 3;
         }
         
         if(command.startsWith("BLINK ")) {
             
-            if(ps==null) return 3;
+            if(ps==null) return 4;
             
             // BLINK L,R, x,y,  x,y
             String [] coords = command.substring(6).split(",");
@@ -97,10 +97,19 @@ public class Jack extends Sequencer {
             String right = "$"+coords[4].trim()+coords[5].trim();
             
             ps.println(" byte $02, "+flags+", "+left+", " + right+" ' "+command);
-            return 3;
+            return 4;
         }
         
         if(command.startsWith("COLORS")) {
+            
+            int padding = 0;
+            while((address%4) !=2) {
+                ++padding;
+                ++address;
+                if(ps!=null) {
+                    ps.println(" byte $00 ' Padding");
+                }
+            }
             
             // COLORS
             //  ...
@@ -114,14 +123,14 @@ public class Jack extends Sequencer {
                 colors.add(c.get(0));
             }
             
-            if(ps==null) return colors.size()*4+1;
+            if(ps==null) return colors.size()*4+2+padding;
             
             ps.println(" byte $03, "+Sequencer.twoDigitHex(colors.size())+" ' "+command);
             for(String c : colors) {
                 ps.println(" byte "+c);
             }
             
-            return colors.size()*4+1;
+            return colors.size()*4+2+padding;
         }
         
         if(command.startsWith("DRAWMOUTH ")) {
@@ -133,7 +142,7 @@ public class Jack extends Sequencer {
             List<String> raster = getNextLines(8);
             raster = mouthPixelSwap(raster);
             
-            if(ps==null) return 64*3;
+            if(ps==null) return 64*3+1;
             
             String colorMap = command.substring(10).trim();
             
@@ -153,7 +162,7 @@ public class Jack extends Sequencer {
                 }
             }
             
-            return 64*3;
+            return 64*3+1;
         }
         
         if(command.startsWith("DRAWNOSE ")) {
@@ -164,7 +173,7 @@ public class Jack extends Sequencer {
             
             List<String> raster = getNextLines(8);
             
-            if(ps==null) return 64;
+            if(ps==null) return 64+1;
             
             String colorMap = command.substring(9).trim();
             
@@ -184,7 +193,7 @@ public class Jack extends Sequencer {
                 }
             }
             
-            return 64;
+            return 64+1;
         }
         
         throw new RuntimeException("UNKNOWN: "+command);
