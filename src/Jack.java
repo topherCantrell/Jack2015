@@ -31,43 +31,7 @@ public class Jack extends Sequencer {
     public Jack(String filename) throws IOException {
         super(filename);        
     }
-    
-    private List<String> mouthPixelSwap(List<String> data) {
         
-        // aaaaaaaa bbbbbbbb cccccccc
-        // aaaaaaaa bbbbbbbb cccccccc
-        // aaaaaaaa bbbbbbbb cccccccc
-        // aaaaaaaa bbbbbbbb cccccccc
-        // aaaaaaaa bbbbbbbb cccccccc
-        // aaaaaaaa bbbbbbbb cccccccc
-        // aaaaaaaa bbbbbbbb cccccccc
-        // aaaaaaaa bbbbbbbb cccccccc   
-        
-        // aaaaaaaa aaaaaaaa aaaaaaaa
-        // aaaaaaaa aaaaaaaa aaaaaaaa
-        // aaaaaaaa aaaaaaaa bbbbbbbb
-        // bbbbbbbb bbbbbbbb bbbbbbbb
-        // bbbbbbbb bbbbbbbb bbbbbbbb
-        // bbbbbbbb cccccccc cccccccc
-        // cccccccc cccccccc cccccccc
-        // cccccccc cccccccc cccccccc
-        
-        List<String> ret = new ArrayList<String>();
-        String build = "";
-        for(int x=0;x<3;++x) {
-            for(int row=0;row<8;++row) {
-                String ds = data.get(row).substring(x*8,x*8+8);
-                build = build + ds;
-                if(build.length()==24) {
-                    ret.add(build);
-                    build = "";
-                }
-            }
-        }
-        
-        return ret;
-    }
-    
     @Override
     public int doCompile(int address,String command,PrintStream ps) {
         if(command.startsWith("DRAWEYES ")) {
@@ -140,8 +104,7 @@ public class Jack extends Sequencer {
             // ...
             
             List<String> raster = getNextLines(8);
-            raster = mouthPixelSwap(raster);
-            
+                        
             if(ps==null) return 64*3+1;
             
             String colorMap = command.substring(10).trim();
