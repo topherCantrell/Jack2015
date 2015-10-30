@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import propellersequencer.Sequencer;
@@ -13,10 +12,9 @@ public class Jack extends Sequencer {
      
      BLINK L,R, x,y,  x,y
      
-     COLORS
+     COLORS count
      ...
-     ...
-     #
+     ...     
      
      DRAWNOSE charMap
      ...
@@ -51,9 +49,10 @@ public class Jack extends Sequencer {
         
         if(command.startsWith("BLINK ")) {
             
-            if(ps==null) return 4;
-            
             // BLINK L,R, x,y,  x,y
+            
+            if(ps==null) return 4;
+                        
             String [] coords = command.substring(6).split(",");
             
             String flags = "$"+coords[0].trim()+coords[1].trim();
@@ -64,7 +63,11 @@ public class Jack extends Sequencer {
             return 4;
         }
         
-        if(command.startsWith("COLORS")) {
+        if(command.startsWith("COLORS ")) {
+            
+            // COLORS size
+            //  ...
+            //  ...
             
             int padding = 0;
             while((address%4) !=2) {
@@ -75,18 +78,10 @@ public class Jack extends Sequencer {
                 }
             }
             
-            // COLORS
-            //  ...
-            //  ...
-            // #
-            
-            List<String> colors = new ArrayList<String>();
-            while(true) {
-                List<String> c = getNextLines(1);
-                if(c.get(0).equals("#")) break;
-                colors.add(c.get(0));
-            }
-            
+            int size = Integer.parseInt(command.substring(7).trim());
+                        
+            List<String> colors = this.getNextLines(size);
+                        
             if(ps==null) return colors.size()*4+2+padding;
             
             ps.println(" byte $03, "+Sequencer.twoDigitHex(colors.size())+" ' "+command);
@@ -163,6 +158,7 @@ public class Jack extends Sequencer {
     }
 
     public static void main(String[] args) throws Exception {
+        
         Jack jack = new Jack("Face.txt");
         
         jack.compile(System.out);

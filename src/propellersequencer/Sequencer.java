@@ -48,10 +48,10 @@ public abstract class Sequencer {
     
     
     
-    List<String> lines = new ArrayList<String>();
-    int linePos;
+    protected List<String> lines = new ArrayList<String>();
+    protected int linePos;
     
-    Map<String,Integer> defines = new HashMap<String,Integer>();
+    protected Map<String,Integer> defines = new HashMap<String,Integer>();
     
     public Sequencer(String filename) throws IOException {
         List<String> ls = Files.readAllLines(Paths.get(filename));

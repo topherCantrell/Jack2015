@@ -1,10 +1,9 @@
 
 set DELAY = 64
 
-Colors
+Colors 2
 $00,$00,$00,$00
 $00,$10,$10,$10
-#
 
 top:
 
