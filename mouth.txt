@@ -1,0 +1,278 @@
+set MOVEDELAY = 64
+set HOLDDELAY = 1500
+set FUDELAY = 100
+
+rndgosub dd_luru,dd_lfru,dd_lurf,chmpit,chmpit
+rndgosub dd_luru,dd_lfru,dd_lurf,chmpit,chmpit
+rndgosub dd_luru,dd_lfru,dd_lurf,chmpit,chmpit
+rndgosub dd_luru,dd_lfru,dd_lurf,chmpit,chmpit
+rndgosub dd_luru,dd_lfru,dd_lurf,chmpit,chmpit
+rndgosub dd_luru,dd_lfru,dd_lurf,chmpit,chmpit
+rndgosub dd_luru,dd_lfru,dd_lurf,chmpit,chmpit
+rndgosub dd_luru,dd_lfru,dd_lurf,chmpit,chmpit
+goto 0
+
+
+
+dd_luru:
+colors 3
+$00,$00,$00
+$00,$20,$08  ; Nice orange color
+$15,$15,$15  ; White
+rndgosub dmp_lfrf
+rndgosub dmp_luru1
+rndgosub dmp_luru2
+rndgosub dmp_luru3
+PAUSE HOLDDELAY
+PAUSE HOLDDELAY
+rndgosub dmp_luru2
+rndgosub dmp_luru1
+rndgosub dmp_lfrf
+PAUSE HOLDDELAY
+RETURN
+
+dd_lfru:
+colors 3
+$00,$00,$00
+$00,$20,$08  ; Nice orange color
+$15,$15,$15  ; White
+rndgosub dmp_lfrf
+rndgosub dmp_lfru1
+rndgosub dmp_lfru2
+rndgosub dmp_lfru3
+PAUSE HOLDDELAY
+PAUSE HOLDDELAY
+rndgosub dmp_lfru2
+rndgosub dmp_lfru1
+rndgosub dmp_lfrf
+PAUSE HOLDDELAY
+RETURN
+
+dd_lurf:
+colors 3
+$00,$00,$00
+$00,$20,$08  ; Nice orange color
+$15,$15,$15  ; White
+rndgosub dmp_lfrf
+rndgosub dmp_lurf1
+rndgosub dmp_lurf2
+rndgosub dmp_lurf3
+PAUSE HOLDDELAY
+PAUSE HOLDDELAY
+rndgosub dmp_lurf2
+rndgosub dmp_lurf1
+rndgosub dmp_lfrf
+PAUSE HOLDDELAY
+RETURN
+
+
+dmp_lfrf:
+DrawMouth .#
+........................
+........................
+........................
+########################
+########################
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+
+dmp_lfru1:
+DrawMouth .#
+........................
+........................
+.......................#
+########################
+#######################.
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_lfru2:
+DrawMouth .#
+........................
+.......................#
+....................####
+#######################.
+####################....
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_lfru3:
+DrawMouth .#
+.......................#
+....................####
+.................######.
+####################....
+#################.......
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+
+
+dmp_luru1:
+DrawMouth .#
+........................
+........................
+#......................#
+########################
+.######################.
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_luru2:
+DrawMouth .#
+........................
+#......................#
+####................####
+.######################.
+....################....
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_luru3:
+DrawMouth .#
+#......................#
+####................####
+.######..........######.
+....################....
+.......##########.......
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+
+dmp_lurf1:
+DrawMouth .#
+........................
+........................
+#.......................
+########################
+.#######################
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_lurf2:
+DrawMouth .#
+........................
+#.......................
+####....................
+.#######################
+....####################
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_lurf3:
+DrawMouth .#
+#.......................
+####....................
+.######.................
+....####################
+.......#################
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+set MDDELAY = 500
+
+chmpit:
+
+colors 4
+$00,$00,$00
+$00,$20,$08  ; Nice orange color
+$20,$00,$20  ; ??
+$00,$20,$20  ; ??
+
+
+rndgosub chomp4
+rndgosub chomp3
+rndgosub chomp2
+rndgosub chomp1
+rndgosub chomp2
+rndgosub chomp3
+rndgosub chomp4
+rndgosub chomp3
+rndgosub chomp2
+rndgosub chomp1
+rndgosub chomp2
+rndgosub chomp3
+return
+
+chomp1:
+drawmouth .#*@
+........########........
+....####@@...@@.####....
+.###....@@...@@..@@.###.
+#......................#
+#....**.............**.#
+.###.**...**...**...###.
+....####..**...*####....
+........########........
+PAUSE MDDELAY
+return
+
+chomp2:
+drawmouth .#*@
+........................
+........########........
+....####@@...@@.####....
+####....@@...@@..@@.####
+####.**...**...**...####
+....####..**...*####....
+........########........
+........................
+PAUSE MDDELAY
+return
+
+chomp3:
+drawmouth .#*@
+........................
+........................
+........########........
+########@@**.@@*########
+########@@**.@@*########
+........########........
+........................
+........................
+PAUSE MDDELAY
+return
+
+chomp4:
+drawmouth .#*@
+........................
+........................
+........................
+########################
+########################
+........................
+........................
+........................
+PAUSE MDDELAY
+return

@@ -19,6 +19,8 @@ public abstract class Sequencer {
      
      NOP         -> 00          ; No-op (useful for padding)
      PAUSE  msec -> F0, mm, ll  ; Pause for given milliseconds
+     RNDGOSUB cnt, aa, bb, cc, .. -> F1 cc, aa, bb, cc, .. ; Pick one of the routines to run at random
+     RETURN      -> F2
      GOTO   addr -> FF, mm, ll  ; Jump to the given address
      
      */
@@ -119,7 +121,7 @@ public abstract class Sequencer {
             }
             
             if(s.startsWith("PAUSE ")) {
-                address += 2;
+                address += 3;
                 if(ps==null) continue;
                 int i = s.indexOf(" ");
                 i = Integer.parseInt(s.substring(i+1).trim());
@@ -128,11 +130,44 @@ public abstract class Sequencer {
             }
             
             if(s.startsWith("GOTO ")) {
-                address += 2;
+                address += 3;
                 if(ps==null) continue;
                 int i = s.indexOf(" ");
                 i = Integer.parseInt(s.substring(i+1).trim());
                 ps.println(" byte $FF, "+outputWord(i)+" ' "+s);
+                continue;
+            }
+            
+            if(s.startsWith("RNDGOSUB ")) {
+                // RNDGOSUB cnt, aa, bb, cc, .. -> F1 cc, aa, bb, cc, .. 
+                
+                String [] routs = s.substring(9).split(",");
+                
+                address += (2+routs.length*2);
+                
+                if(ps==null) continue;
+                
+                ps.print(" byte $F1, "+Sequencer.twoDigitHex(routs.length));
+                for(String rout : routs) {
+                    ps.print(" ,"+Sequencer.outputWord(Integer.parseInt(rout.trim())));
+                }
+                ps.println(" ' "+s);
+                
+                continue;
+                
+            }
+            
+            if(s.startsWith("RETURN")) {
+                address += 1;
+                if(ps==null) continue;
+                ps.println(" byte $F2 ' "+s);
+                continue;
+            }
+            
+            if(s.startsWith("ABORT")) {
+                address +=1;
+                if(ps==null) continue;
+                ps.println(" byte $FE ' "+s);
                 continue;
             }
             

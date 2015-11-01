@@ -1,0 +1,75 @@
+
+
+nosecolors 3
+$00,$00,$00
+$00,$20,$08  ; Nice orange color
+$15,$15,$15  ; White
+
+rndgosub drn1
+pause 2000
+rndgosub drn2
+pause 1000
+rndgosub drn1
+pause 1000
+rndgosub drn2
+pause 500
+rndgosub drn1
+pause 500
+rndgosub drn3
+pause 1000
+rndgosub drn1
+pause 2000
+rndgosub drn2
+pause 500
+rndgosub drn2
+pause 2000
+rndgosub drn3
+pause 1000
+rndgosub drn2
+pause 500
+rndgosub drn3
+pause 2000
+rndgosub drn1
+pause 1000
+rndgosub drn2
+pause 1000
+
+goto 0
+
+
+drn1:
+drawnose .#
+........
+........
+........
+...##...
+...##...
+..####..
+.######.
+........
+return
+
+drn2:
+drawnose .#
+........
+........
+........
+...##...
+..###...
+.####...
+#####...
+........
+return
+
+drn3:
+drawnose .#
+........
+........
+........
+...##...
+...###..
+...####.
+...#####
+........
+return
+

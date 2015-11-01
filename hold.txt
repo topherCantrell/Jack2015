@@ -1,0 +1,149 @@
+
+
+
+orb2:
+DrawEyes 2,2, 2,2
+Pause 1000
+RNDGOSUB sub1, sub2
+PAUSE 1000
+GOTO orb2
+
+sub1:
+EYEPATTERN .GRY
+GGGGGGGGGGGGGGGG
+G......GG......G
+G......GG......G
+G......GG......G
+G......GG......G
+G......GG......G
+G......GG......G
+GGGGGGGGGGGGGGGG
+RETURN
+
+sub2:
+EYEPATTERN .GRY
+RRRRRRRRRRRRRRRR
+R......RR......R
+R......RR......R
+R......RR......R
+R......RR......R
+R......RR......R
+R......RR......R
+RRRRRRRRRRRRRRRR
+RETURN
+
+
+test:
+EYEPATTERN .GRY 
+..GYRY....GRGR..
+.RGYRGY..RYYRGY.
+GYRGYYRGYRGYRYGR
+YGR..GRRRGY..YGR
+GRY..GRGRYR..RYG
+RGYGGGRYGYRGYGYR
+.YRGYGR..GYRGYR.
+..YGGY....YRYR..
+
+pause 5000
+goto test
+
+
+Colors 3
+;BB  RR  GG
+$00,$00,$00  ; Black
+$00,$20,$08  ; Nice orange color
+$15,$15,$15  ; White
+
+top:
+
+DrawNose .#*
+........
+........
+........
+........
+........
+....#...
+...###..
+..#####.
+
+DrawMouth .#
+#......................#
+##....................##
+####................####
+#...#####......#####...#
+.#.......######.......#.
+..###..............###..
+.....###........###.....
+........########........
+
+DrawEyes 2,2, 2,2
+Pause 1000
+Blink 1,1, 2,2, 2,2
+Pause 500
+Blink 1,1, 2,2, 2,2
+Pause 100
+
+DrawEyes 1,1, 1,1
+Pause DELAY
+
+DrawEyes 2,1, 2,1
+Pause DELAY
+
+DrawEyes 3,1, 3,1
+Pause DELAY
+
+DrawEyes 3,2, 3,2
+Pause DELAY
+
+DrawEyes 3,3, 3,3
+Pause DELAY
+
+DrawEyes 2,3, 2,3
+Pause DELAY
+
+DrawEyes 1,3, 1,3
+Pause DELAY
+
+DrawEyes 1,2, 1,2
+Pause DELAY
+
+GOTO top
+
+NOP
+NOP
+NOP
+
+; Blink by blanking lines from top and bottom to middle and back.
+; Blink in an alternating pattern. Blink one to wink.
+; Brighten and dim displays.
+; Scroll left and right.
+;
+; 2x2 hole can be anywhere in the inner 6x6.
+;
+; 5 possible vertical positions, 5 possible horizontal positions. 25 total.
+;
+; (x,y) 0,0 is middle
+; (-2,-2) is upper left
+; (2,2) is lower right
+;
+; OO....
+; .OO...
+; ..OO..
+; ...OO.
+; ....OO
+; ......
+;
+; Standard sequence commands:
+; PAUSE N (milliseconds)
+; LOOP/NEXT (
+; GOSUB A (subroutine A)
+; RETURN (return from subroutine)
+; RANDOM A,B (go to random sequence number A to B inclusive)
+; GOTO A (go to sequence)
+;
+; Eye specific commands:
+; COLORS L, R, B (left, right, background ... 0,1,2,3)
+; BLINK N (0=left, 1=right, 2=both)
+; BRIGHTNESS N (0-15)
+; X,Y (-2,-2 to 2,2)
+;

@@ -1,0 +1,74 @@
+RNDGOSUB doSparkle
+ABORT
+
+doSparkle:
+NoseColors 11
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+
+MouthColors 11
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RETURN
+
+
+doSpOne:
+
+RNDPALETTENOSE 10
+RNDPALETTEMOUTH 10
+
+RNDEYES
+
+DrawNose .ABCDEFGHIJ
+........
+........
+........
+...C....
+..HBE...
+..GHC...
+.IBDBD..
+ECJAHEJ.
+
+DrawMouth .ABCDEFGHIJ
+E......................G
+.A....................E.
+.DGA................JGF.
+..FIGHCFIJ....GIHHJCJG..
+...JJEDIIBDBDADJGCIBA...
+...ECJAHEHJJFFEHHBCGJ...
+....IGIFCBAJBGHFICEI....
+.......DJHBEHDJDI.......
+
+pause 500
+RETURN

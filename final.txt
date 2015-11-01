@@ -1,0 +1,446 @@
+
+RNDGOSUB doSparkle
+RNDGOSUB doSparkle
+goto 0
+
+doSparkle:
+Colors 11
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+$00,$00,$00
+
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RNDGOSUB doSpOne
+RETURN
+
+
+doSpOne:
+
+RNDPALETTE 10
+
+RNDEYES
+
+DrawNose .ABCDEFGHIJ
+........
+........
+........
+...C....
+..HBE...
+..GHC...
+.IBDBD..
+ECJAHEJ.
+
+DrawMouth .ABCDEFGHIJ
+E......................G
+.A....................E.
+.DGA................JGF.
+..FIGHCFIJ....GIHHJCJG..
+...JJEDIIBDBDADJGCIBA...
+...ECJAHEHJJFFEHHBCGJ...
+....IGIFCBAJBGHFICEI....
+.......DJHBEHDJDI.......
+
+pause 500
+RETURN
+
+
+
+
+
+
+
+
+doEyes:
+rndgosub pattern1, pattern2, pattern3, pattern4, pattern6
+goto doEyes
+
+; Rolling eyes
+pattern6:
+DrawEyes 2,2
+PAUSE HOLDDELAY
+DrawEyes 3,3
+PAUSE MOVEDELAY
+DrawEyes 4,4
+PAUSE MOVEDELAY
+rndgosub pattern5
+rndgosub pattern5
+DrawEyes 3,3
+PAUSE MOVEDELAY
+return
+
+pattern5:
+DrawEyes 3,4
+PAUSE MOVEDELAY
+DrawEyes 2,4
+PAUSE MOVEDELAY
+DrawEyes 1,4
+PAUSE MOVEDELAY
+DrawEyes 0,4
+PAUSE MOVEDELAY
+DrawEyes 0,3
+PAUSE MOVEDELAY
+DrawEyes 0,2
+PAUSE MOVEDELAY
+DrawEyes 0,1
+PAUSE MOVEDELAY
+DrawEyes 0,0
+PAUSE MOVEDELAY
+DrawEyes 1,0
+PAUSE MOVEDELAY
+DrawEyes 2,0
+PAUSE MOVEDELAY
+DrawEyes 3,0
+PAUSE MOVEDELAY
+DrawEyes 4,0
+PAUSE MOVEDELAY
+DrawEyes 4,1
+PAUSE MOVEDELAY
+DrawEyes 4,2
+PAUSE MOVEDELAY
+DrawEyes 4,3
+PAUSE MOVEDELAY
+DrawEyes 4,4
+PAUSE MOVEDELAY
+RETURN
+
+
+
+
+pattern4:
+DrawEyes 2,2
+PAUSE HOLDDELAY
+DrawEyes 3,1, 3,3
+PAUSE MOVEDELAY
+PAUSE MOVEDELAY
+DrawEyes 4,0, 4,4 
+PAUSE HOLDDELAY
+PAUSE HOLDDELAY
+DrawEyes 3,1, 3,3
+PAUSE MOVEDELAY
+PAUSE MOVEDELAY
+RETURN
+
+pattern3:
+DrawEyes 1,3
+PAUSE MOVEDELAY
+DrawEyes 0,3
+PAUSE HOLDDELAY
+DrawEyes 1,3
+PAUSE MOVEDELAY
+return
+
+pattern2:
+DrawEyes 2,2
+PAUSE HOLDDELAY
+DrawEyes 1,1
+PAUSE MOVEDELAY
+DrawEyes 1,0
+PAUSE HOLDDELAY
+DrawEyes 2,0
+PAUSE MOVEDELAY
+DrawEyes 3,0
+PAUSE HOLDDELAY
+PAUSE HOLDDELAY
+DrawEyes 2,1
+PAUSE MOVEDELAY
+return
+
+pattern1:
+DrawEyes 2,2, 2,2
+PAUSE HOLDDELAY
+BLINK 1,1,2,2,2,2
+PAUSE HOLDDELAY
+DrawEyes 3,3, 3,3
+PAUSE MOVEDELAY
+DrawEyes 4,4, 4,4
+PAUSE HOLDDELAY
+BLINK 1,1,4,4,4,4
+PAUSE HOLDDELAY
+DrawEyes 3,3, 3,3
+PAUSE MOVEDELAY
+return
+
+
+
+
+
+
+
+
+
+set MOVEDELAY = 64
+set HOLDDELAY = 1500
+set FUDELAY = 100
+
+colors 3
+$00,$00,$00
+$00,$20,$08  ; Nice orange color
+$15,$15,$15  ; White
+
+dd_luru:
+rndgosub dmp_lfrf
+rndgosub dmp_luru1
+rndgosub dmp_luru2
+rndgosub dmp_luru3
+PAUSE HOLDDELAY
+PAUSE HOLDDELAY
+rndgosub dmp_luru2
+rndgosub dmp_luru1
+rndgosub dmp_lfrf
+PAUSE HOLDDELAY
+RETURN
+
+dd_lfru:
+rndgosub dmp_lfrf
+rndgosub dmp_lfru1
+rndgosub dmp_lfru2
+rndgosub dmp_lfru3
+PAUSE HOLDDELAY
+PAUSE HOLDDELAY
+rndgosub dmp_lfru2
+rndgosub dmp_lfru1
+rndgosub dmp_lfrf
+PAUSE HOLDDELAY
+RETURN
+
+dd_lurf:
+rndgosub dmp_lfrf
+rndgosub dmp_lurf1
+rndgosub dmp_lurf2
+rndgosub dmp_lurf3
+PAUSE HOLDDELAY
+PAUSE HOLDDELAY
+rndgosub dmp_lurf2
+rndgosub dmp_lurf1
+rndgosub dmp_lfrf
+PAUSE HOLDDELAY
+RETURN
+
+
+dmp_lfrf:
+DrawMouth .#
+........................
+........................
+........................
+########################
+########################
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+
+dmp_lfru1:
+DrawMouth .#
+........................
+........................
+.......................#
+########################
+#######################.
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_lfru2:
+DrawMouth .#
+........................
+.......................#
+....................####
+#######################.
+####################....
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_lfru3:
+DrawMouth .#
+.......................#
+....................####
+.................######.
+####################....
+#################.......
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+
+
+dmp_luru1:
+DrawMouth .#
+........................
+........................
+#......................#
+########################
+.######################.
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_luru2:
+DrawMouth .#
+........................
+#......................#
+####................####
+.######################.
+....################....
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_luru3:
+DrawMouth .#
+#......................#
+####................####
+.######..........######.
+....################....
+.......##########.......
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+
+dmp_lurf1:
+DrawMouth .#
+........................
+........................
+#.......................
+########################
+.#######################
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_lurf2:
+DrawMouth .#
+........................
+#.......................
+####....................
+.#######################
+....####################
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+dmp_lurf3:
+DrawMouth .#
+#.......................
+####....................
+.######.................
+....####################
+.......#################
+........................
+........................
+........................
+PAUSE FUDELAY
+RETURN
+
+set MDDELAY = 500
+
+chmpit:
+
+colors 4
+$00,$00,$00
+$00,$20,$08  ; Nice orange color
+$20,$00,$20  ; ??
+$00,$20,$20  ; ??
+
+rndgosub chomp2
+rndgosub chomp3
+rndgosub chomp4
+rndgosub chomp3
+rndgosub chomp2
+rndgosub chomp1
+rndgosub chomp2
+rndgosub chomp3
+rndgosub chomp4
+rndgosub chomp3
+rndgosub chomp2
+rndgosub chomp1
+return
+
+chomp1:
+drawmouth .#*@
+........########........
+....####@@...@@.####....
+.###....@@...@@..@@.###.
+#......................#
+#....**.............**.#
+.###.**...**...**...###.
+....####..**...*####....
+........########........
+PAUSE MDDELAY
+return
+
+chomp2:
+drawmouth .#*@
+........................
+........########........
+....####@@...@@.####....
+.###....@@...@@..@@.###.
+.###.**...**...**...###.
+....####..**...*####....
+........########........
+........................
+PAUSE MDDELAY
+return
+
+chomp3:
+drawmouth .#*@
+........................
+........................
+........########........
+..######@@**.@@*######..
+..######@@**.@@*######..
+........########........
+........................
+........................
+PAUSE MDDELAY
+return
+
+chomp4:
+drawmouth .#*@
+........................
+........................
+........................
+..####################..
+..####################..
+........................
+........................
+........................
+PAUSE MDDELAY
+return
