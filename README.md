@@ -16,8 +16,21 @@ The plan is to use the two smaller displays for eyes. Three of the plates will m
 
 I already have the propeller software going. I was planning a Circuit Cellar article (of course) on the grid mapping. This project will be a good addition to the article.
 
-Schematics:
+Here is another project using LED grids for eyes:
+[https://www.youtube.com/watch?v=e3O-ti5n6jw](https://www.youtube.com/watch?v=e3O-ti5n6jw)
+
+## Schematics
 ![](https://github.com/topherCantrell/Jack2015/blob/master/art/JackSchematics.png)
 
-Here is project using LED grids for eyes:
-[https://www.youtube.com/watch?v=e3O-ti5n6jw](https://www.youtube.com/watch?v=e3O-ti5n6jw)
+## The Jack Language
+I create a DSL (domain specific language) for the project. I wrote a compiler for it in Java. The compiler outputs Propeller DAT sections for compiling into the propeller. Have a look at "nose.txt" and "mouth.txt" to see the language in action. The "Jack2015.spin" contains the interpreter and the compiled scripts.
+
+The code launches 3 copies of the Jack interpreter -- one for the eyes, one for the nose, and one for the mouth. They run independently of one another.
+
+## Photos
+
+![](https://github.com/topherCantrell/Jack2015/blob/master/art/IMG_0291.JPG)
+
+![](https://github.com/topherCantrell/Jack2015/blob/master/art/IMG_0299.JPG)
+
+
