@@ -3,6 +3,10 @@
 I have four bright neo-pixel plates and a couple of smaller LED grids. I might
 as well put them to work in a Jack-O-Lantern this year.
 
+### As seen on Youtube
+[![](art/youtube.jpg)](https://www.youtube.com/) <br>
+https://www.youtube.com/watch?v=z5ygn6gWkBM&t=12s
+
 LED Grid:
 [http://www.adafruit.com/product/902](http://www.adafruit.com/product/902)
 
